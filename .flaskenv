@@ -1,0 +1,3 @@
+FLASK_APP=app
+FLASK_ENV=delelopment
+FLASK_DEBUG=1
