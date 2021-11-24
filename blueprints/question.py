@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, flash, url_for, g
+from sqlalchemy import or_
 
 from decorators import login_required
 from extensions import db
@@ -74,7 +75,7 @@ def answer(question_id):
         db.session.commit()
         return redirect('/')
     else:
-        flash("表单验证失败！")
+        flash('表单验证失败！')
     return redirect('/')
 
 
@@ -88,5 +89,8 @@ def delete_answer(answer_id):
 
 @bp.route('/')
 def index():
-    questions = QuestionModel.query.order_by(db.text('-create_time')).all()
-    return render_template('index.html', questions=questions)
+    q = request.args.get('q') or ''
+    questions = QuestionModel.query.filter(
+        or_(QuestionModel.title.contains(q), QuestionModel.content.contains(q))
+    ).order_by(db.text('-create_time'))
+    return render_template('index.html', questions=questions, q=q)

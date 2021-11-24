@@ -61,13 +61,15 @@
         </li>
       </ul>
 
-      <form class="row">
+      <form class="row" action="{{url_for('question.index')}}">
         <div class="col-md-8">
           <input
             type="search"
             class="form-control"
             placeholder="搜索..."
             aria-label="Search"
+            name="q"
+            value="{{q}}"
           />
         </div>
         <div class="col-md-4">
@@ -108,7 +110,7 @@
           <li>
             <a
               class="dropdown-item"
-              href="{{url_for('people.profile', username=user.username, method="delete")}}"
+              href="{{url_for('people.profile', username=user.username)}}"
             >
               我的主页
             </a>

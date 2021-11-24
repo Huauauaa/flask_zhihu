@@ -20,7 +20,7 @@ block content %} {% for question in questions %}
         data-bs-target="#collapseExample"
         style="cursor: pointer"
       >
-        162条评论
+        {{question.answers | length}}条评论
       </div>
       <div class="col">分享</div>
       <div class="col">收藏</div>
@@ -66,8 +66,14 @@ block content %} {% for question in questions %}
     {% for answer in question.answers %}
     <div class="row my-2">
       <div class="row">
-        <div class="col-9">{{answer.author.username}}</div>
-        <div class="col-2">{{answer.create_time}}</div>
+        <div class="col-8"><img
+            src="https://randomuser.me/api/portraits/women/{{answer.author.id}}.jpg"
+            alt="mdo"
+            width="32"
+            height="32"
+            class="rounded-circle me-2"
+          />{{answer.author.username}}</div>
+        <div class="col-3">{{answer.create_time}}</div>
         <div class="col-1">
           {% if user.id == answer.author.id %}
           <a class="text-decoration-none" href="{{url_for('question.delete_answer', answer_id=answer.id)}}">
