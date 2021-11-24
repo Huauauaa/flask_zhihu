@@ -1,0 +1,46 @@
+<div
+  class="modal fade"
+  id="publishModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{{url_for('question.publish')}}">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control rounded-4"
+              name="title"
+              id="floatingInput"
+            />
+            <label for="floatingInput">写下你的问题</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control rounded-4"
+              id="floatingInput"
+              name="content"
+              rows="3"
+            ></textarea>
+            <label for="floatingInput">输入问题背景,条件等详细信息(选填)</label>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-sm btn-primary me-auto">
+              发布问题
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

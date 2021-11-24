@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block title %}{{question.title}}{% endblock title
+%} {% block content %} {% if type != 'edit' %}
+<div class="row">{{question.title}}</div>
+<div class="row">{{question.content}}</div>
+{% else %}
+<form
+  method="post"
+  action="{{url_for('question.update', question_id=question.id)}}"
+>
+  <div class="mb-3">
+    <label for="titleRef" class="form-label">标题</label>
+    <input
+      class="form-control"
+      id="titleRef"
+      name="title"
+      value="{{question.title}}"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="contentRef" class="form-label">内容</label>
+    <textarea class="form-control" id="contentRef" name="content">
+{{question.content}}</textarea
+    >
+  </div>
+  <button type="submit" class="btn btn-primary">更新</button>
+</form>
+{% endif %} {% endblock content %}

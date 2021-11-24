@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+  <div class="col-6 offset-3">
+    <form method="POST" action="{{url_for('user.login')}}">
+      <h1 class="h3 mb-3 fw-normal text-center">登录</h1>
+
+      <div class="form-floating my-1">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          name="email"
+        />
+        <label for="floatingInput">邮箱</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          name="password"
+        />
+        <label for="floatingPassword">密码</label>
+      </div>
+      {% for message in get_flashed_messages() %}
+      <div class="form-group">
+        <div class="text-danger">{{ message }}</div>
+      </div>
+      {% endfor %}
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">登录</button>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

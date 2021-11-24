@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block title %}注册{% endblock title %} {% block
+content %}
+<div class="row">
+  <div class="col-6 offset-3">
+    <form action="{{ url_for('user.register')}}" method="POST">
+      <h1 class="h3 mb-3 fw-normal text-center">注册</h1>
+
+      <div class="form-floating my-1">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          name="email"
+        />
+        <label for="floatingInput">邮箱</label>
+      </div>
+
+      <div class="row">
+        <div class="col-9">
+          <div class="form-floating my-1">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              name="captcha"
+            />
+            <label for="floatingInput">验证码</label>
+          </div>
+        </div>
+        <div class="col d-flex align-items-center">
+          <button type="button" class="btn btn-primary" data-name="captcha">
+            获取验证码
+          </button>
+        </div>
+      </div>
+
+      <div class="form-floating my-1">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingPassword"
+          name="username"
+        />
+        <label for="floatingPassword">用户名</label>
+      </div>
+
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          name="password"
+        />
+        <label for="floatingPassword">密码</label>
+      </div>
+
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          name="password_confirm"
+        />
+        <label for="floatingPassword">确认密码</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">注册</button>
+    </form>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/captcha.js')}}" async></script>
+{% endblock content %}

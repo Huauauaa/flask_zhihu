@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block title %} 首页-知乎 {% endblock title %} {%
+block content %} {% for question in questions %}
+<div class="row my-2">
+  <div
+    class="col-10 offset-1 bg-white border border-light rounded p-3"
+    style="box-shadow: 1px 1px #ddd"
+  >
+    <a
+      class="fw-bolder fs-3 text-decoration-none text-reset"
+      href="{{url_for('question.detail',question_id=question.id)}}"
+    >
+      {{question.title}}
+    </a>
+    <p class="fs-6">{{question.content}}</p>
+    <div class="row">
+      <div class="col">赞同</div>
+      <div
+        class="col"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseExample"
+        style="cursor: pointer"
+      >
+        162条评论
+      </div>
+      <div class="col">分享</div>
+      <div class="col">收藏</div>
+      <div class="col">喜欢</div>
+      <div class="col">
+        <a
+          href="#"
+          class="d-block link-dark text-decoration-none dropdown-toggle"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li>
+            <a class="dropdown-item" href="#">不感兴趣</a>
+          </li>
+          {% if user.id == question.author_id %}
+          <li>
+            <a
+              class="dropdown-item"
+              href="{{url_for('question.update', question_id=question.id)}}"
+            >
+              更新
+            </a>
+          </li>
+          <li>
+            <a
+              class="dropdown-item"
+              href="{{url_for('question.delete', question_id=question.id)}}"
+            >
+              删除
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row collapse" id="collapseExample">
+  <div class="col-10 offset-1">
+    {% for answer in question.answers %}
+    <div class="row my-2">
+      <div class="row">
+        <div class="col-9">{{answer.author.username}}</div>
+        <div class="col-2">{{answer.create_time}}</div>
+        <div class="col-1">
+          {% if user.id == answer.author.id %}
+          <a class="text-decoration-none" href="{{url_for('question.delete_answer', answer_id=answer.id)}}">
+            删除
+          </a>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-10 offset-1">{{answer.content}}</div>
+      </div>
+      <hr />
+    </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-12">
+          <form
+            method="post"
+            action="{{url_for('question.answer', question_id=question.id)}}"
+          >
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control rounded-4"
+                id="answerContentRef"
+                name="content"
+                rows="3"
+              ></textarea>
+              <label for="answerContentRef">写下你的评论</label>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-sm btn-primary me-auto">
+                提交
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endblock content %}
+</div>

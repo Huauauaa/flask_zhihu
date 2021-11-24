@@ -1,0 +1,131 @@
+<header class="p-3 mb-3 border-bottom">
+  <div class="container">
+    <div
+      class="
+        d-flex
+        flex-wrap
+        align-items-center
+        justify-content-center justify-content-lg-start
+      "
+    >
+      <a
+        href="/"
+        class="
+          d-flex
+          align-items-center
+          mb-2 mb-lg-0
+          text-dark text-decoration-none
+        "
+      >
+        <img
+          src="{{ url_for('static', filename='images/Zhihu_logo.svg')}}"
+          alt="logo"
+          width="64"
+          height="30"
+        />
+      </a>
+
+      <ul
+        class="
+          nav
+          col-12 col-lg-auto
+          me-lg-auto
+          mb-2
+          justify-content-center
+          mb-md-0
+        "
+      >
+        <li><a href="/" class="nav-link px-2 link-secondary">首页</a></li>
+        <li>
+          <a
+            href="{{url_for('xen.vip_web')}}"
+            class="nav-link px-2 link-secondary"
+          >
+            会员
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{url_for('explore.index')}}"
+            class="nav-link px-2 link-secondary"
+          >
+            发现
+          </a>
+        </li>
+        <li>
+          <a
+            href="{{url_for('question.waiting')}}"
+            class="nav-link px-2 link-dark"
+            >等你来答
+          </a>
+        </li>
+      </ul>
+
+      <form class="row">
+        <div class="col-md-8">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="搜索..."
+            aria-label="Search"
+          />
+        </div>
+        <div class="col-md-4">
+          {% if user %}
+            <button
+              type="button"
+              class="btn btn-primary"
+              style="border-radius: 20px"
+              data-bs-toggle="modal"
+              data-bs-target="#publishModal"
+            >
+              提问
+            </button>
+          {% endif %}
+        </div>
+      </form>
+
+      {% include 'publish.html' %}
+
+      <div class="dropdown text-end">
+        {% if user %}
+        <a
+          href="#"
+          class="d-block link-dark text-decoration-none dropdown-toggle"
+          id="dropdownUser1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://randomuser.me/api/portraits/women/{{user.id}}.jpg"
+            alt="mdo"
+            width="32"
+            height="32"
+            class="rounded-circle"
+          />
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li>
+            <a
+              class="dropdown-item"
+              href="{{url_for('people.profile', username=user.username, method="delete")}}"
+            >
+              我的主页
+            </a>
+          </li>
+
+          <li><a class="dropdown-item" href="#">创作中心</a></li>
+          <li><a class="dropdown-item" href="#">设置</a></li>
+          <li>
+            <a class="dropdown-item" href="{{url_for('user.logout')}}">退出</a>
+          </li>
+        </ul>
+        {% else %}
+        <a href={{url_for('user.login')}}>登录</a>
+        <a href={{url_for('user.register')}}>注册</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+
